@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>박민정 | Data Analyst Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #f7f5f0;
+      --bg2:      #eeeae1;
+      --bg3:      #e6e1d6;
+      --border:   #d8d2c5;
+      --accent:   #2d5a3d;
+      --accent2:  #5c8a4a;
+      --accent-lt:#e8f0e9;
+      --text:     #1a1a18;
+      --text-muted:#5a5a52;
+      --text-dim: #9a9a90;
+      --serif:    'Noto Serif KR', serif;
+      --mono:     'Space Mono', monospace;
+      --sans:     'Noto Sans KR', sans-serif;
+      --shadow:   0 2px 16px rgba(0,0,0,0.07);
+      --shadow-md:0 4px 32px rgba(0,0,0,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 52px; height: 64px;
+      background: rgba(247,245,240,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono); font-size: 13px;
+      color: var(--accent); letter-spacing: 0.05em; text-decoration: none; font-weight: 700;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 11px; color: var(--text-muted);
+      text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #home {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding: 0 52px; padding-top: 64px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-decor {
+      position: absolute; right: -80px; top: 60px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(45,90,61,0.07) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding-right: 48px; padding-bottom: 80px; padding-top: 32px;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 11px; color: var(--accent);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards;
+    }
+    .hero-name {
+      font-family: var(--serif); font-size: clamp(52px, 6vw, 76px);
+      font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 6px;
+      opacity: 0; animation: fadeUp 0.6s ease 0.35s forwards;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-name-en {
+      font-family: var(--mono); font-size: 15px; color: var(--text-dim);
+      letter-spacing: 0.2em; margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.6s ease 0.45s forwards;
+    }
+    .hero-desc {
+      font-size: 16px; line-height: 1.9; color: var(--text-muted);
+      max-width: 440px; margin-bottom: 44px;
+      opacity: 0; animation: fadeUp 0.6s ease 0.55s forwards;
+    }
+    .hero-cta {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.6s ease 0.65s forwards;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+      border: 1.5px solid; transition: all 0.22s; cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-primary:hover { background: #1e3d2a; border-color: #1e3d2a; }
+    .btn-outline { background: transparent; color: var(--text); border-color: var(--border); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-right {
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; animation: fadeIn 1s ease 0.8s forwards;
+    }
+    .hero-graphic { width: 360px; height: 360px; }
+    .hero-graphic svg { width: 100%; height: 100%; }
+
+    /* ── SECTION ── */
+    .section-wrap { max-width: 1160px; margin: 0 auto; padding: 96px 52px; }
+    .section-label {
+      font-family: var(--mono); font-size: 11px; color: var(--accent);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .section-divider { width: 40px; height: 2px; background: var(--accent); margin-bottom: 14px; }
+    .section-title {
+      font-family: var(--serif); font-size: clamp(30px, 4vw, 44px);
+      font-weight: 700; line-height: 1.1; margin-bottom: 52px; letter-spacing: -0.02em;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .about-text p { color: var(--text-muted); margin-bottom: 18px; font-size: 15px; line-height: 1.9; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .stat-card {
+      background: #fff; border: 1px solid var(--border); padding: 28px 24px;
+      box-shadow: var(--shadow); transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .stat-card:hover { box-shadow: var(--shadow-md); border-color: var(--accent); }
+    .stat-number { font-family: var(--mono); font-size: 32px; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 13px; color: var(--text-muted); }
+
+    /* ── SKILLS ── */
+    .skills-bg { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .skill-category {
+      background: #fff; border: 1px solid var(--border); padding: 28px;
+      box-shadow: var(--shadow); transition: border-color 0.22s, transform 0.2s, box-shadow 0.2s;
+    }
+    .skill-category:hover { border-color: var(--accent2); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .skill-cat-title {
+      font-family: var(--mono); font-size: 10px; color: var(--accent2);
+      letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 18px;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag {
+      font-family: var(--mono); font-size: 11px; padding: 4px 11px;
+      border: 1px solid var(--border); color: var(--text-muted); background: var(--bg);
+      letter-spacing: 0.04em; transition: all 0.18s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-lt); }
+
+    /* ── PROJECTS ── */
+    .projects-featured { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-bottom: 26px; }
+    .project-card {
+      background: #fff; border: 1px solid var(--border); padding: 36px;
+      position: relative; overflow: hidden; box-shadow: var(--shadow);
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .project-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease;
+    }
+    .project-card:hover::after { transform: scaleX(1); }
+    .project-card:hover { box-shadow: var(--shadow-md); border-color: rgba(45,90,61,0.3); }
+
+    .project-number { font-family: var(--mono); font-size: 10px; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 14px; }
+    .project-title { font-family: var(--serif); font-size: 20px; font-weight: 600; margin-bottom: 5px; line-height: 1.3; }
+    .project-period { font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: 0.08em; margin-bottom: 14px; }
+    .project-desc { font-size: 13px; color: var(--text-muted); line-height: 1.8; margin-bottom: 16px; }
+    .project-role {
+      font-size: 12px; color: var(--text-muted); background: var(--bg2);
+      border-left: 2px solid var(--accent); padding: 8px 12px; margin-bottom: 18px; line-height: 1.6;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+    .project-tag {
+      font-family: var(--mono); font-size: 10px; padding: 3px 10px;
+      background: var(--accent-lt); border: 1px solid rgba(45,90,61,0.2); color: var(--accent); letter-spacing: 0.04em;
+    }
+    .project-link {
+      font-family: var(--mono); font-size: 11px; color: var(--accent); text-decoration: none;
+      letter-spacing: 0.06em; display: inline-flex; align-items: center; gap: 5px;
+      border-bottom: 1px solid transparent; transition: border-color 0.2s;
+    }
+    .project-link:hover { border-bottom-color: var(--accent); }
+
+    .projects-small { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .project-small-card {
+      background: #fff; border: 1px solid var(--border); padding: 24px;
+      box-shadow: var(--shadow); transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-small-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+    .project-small-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
+    .project-small-period { font-family: var(--mono); font-size: 10px; color: var(--accent2); margin-bottom: 8px; }
+    .project-small-desc { font-size: 12px; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; }
+
+    /* ── GROWTH ── */
+    .growth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .growth-card { background: #fff; border: 1px solid var(--border); padding: 36px; box-shadow: var(--shadow); }
+    .growth-icon { font-size: 26px; margin-bottom: 18px; }
+    .growth-title { font-family: var(--serif); font-size: 20px; font-weight: 600; margin-bottom: 14px; }
+    .growth-text { font-size: 14px; color: var(--text-muted); line-height: 1.9; margin-bottom: 14px; }
+
+    /* ── EDUCATION ── */
+    .edu-timeline { position: relative; padding-left: 36px; }
+    .edu-timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 1px; background: var(--border);
+    }
+    .edu-item { position: relative; margin-bottom: 44px; }
+    .edu-item::before {
+      content: ''; position: absolute; left: -40px; top: 8px;
+      width: 9px; height: 9px; border: 2px solid var(--accent); background: var(--bg); border-radius: 50%;
+    }
+    .edu-period { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 6px; }
+    .edu-title { font-size: 17px; font-weight: 600; margin-bottom: 3px; }
+    .edu-org { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; }
+    .edu-desc { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+
+    /* ── CERTS ── */
+    .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .cert-card {
+      background: #fff; border: 1px solid var(--border); padding: 22px 24px;
+      display: flex; flex-direction: column; gap: 6px;
+      box-shadow: var(--shadow); transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .cert-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
+    .cert-name { font-size: 14px; font-weight: 600; line-height: 1.4; }
+    .cert-issuer { font-size: 12px; color: var(--text-muted); }
+    .cert-date { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; }
+
+    /* ── CONTACT ── */
+    .contact-wrap {
+      background: var(--accent); color: #fff; padding: 96px 52px; text-align: center;
+    }
+    .contact-heading {
+      font-family: var(--serif); font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em;
+    }
+    .contact-heading span { color: #c8f05e; }
+    .contact-sub { font-size: 15px; color: rgba(255,255,255,0.75); max-width: 440px; margin: 0 auto 44px; line-height: 1.8; }
+    .contact-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 10px; padding: 13px 28px;
+      border: 1.5px solid rgba(255,255,255,0.4); text-decoration: none;
+      color: #fff; font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.08em; transition: all 0.2s; background: rgba(255,255,255,0.07);
+    }
+    .contact-link:hover { background: rgba(255,255,255,0.18); border-color: #fff; }
+
+    footer {
+      padding: 28px 52px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; background: var(--bg);
+    }
+    footer p { font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.06em; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes spin   { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+    @keyframes float  { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #home { grid-template-columns: 1fr; padding: 24px; padding-top: 80px; }
+      .hero-right { display: none; }
+      .section-wrap { padding: 64px 24px; }
+      .about-grid, .projects-featured, .growth-grid { grid-template-columns: 1fr; gap: 24px; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .certs-grid { grid-template-columns: 1fr 1fr; }
+      .projects-small { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .skills-grid, .certs-grid, .projects-small { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">박민정.DA</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#growth">Growth</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home" style="max-width:100%; padding-top:64px;">
+  <div class="hero-bg-decor"></div>
+  <div class="hero-left">
+    <p class="hero-eyebrow">// Data Analyst Portfolio</p>
+    <h1 class="hero-name"><span>박민정</span></h1>
+    <p class="hero-name-en">PARK MINJEONG</p>
+    <p class="hero-desc">
+      데이터로 문제를 정의하고,<br>
+      분석으로 답을 찾아가는<br>
+      데이터 분석가입니다.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">→ 프로젝트 보기</a>
+      <a href="#contact" class="btn btn-outline">연락하기</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-graphic">
+      <svg viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="180" cy="180" r="155" stroke="rgba(45,90,61,0.10)" stroke-width="1"/>
+        <circle cx="180" cy="180" r="120" stroke="rgba(45,90,61,0.07)" stroke-width="1"/>
+        <circle cx="180" cy="180" r="85"  stroke="rgba(45,90,61,0.05)" stroke-width="1"/>
+        <circle cx="180" cy="180" r="155" stroke="rgba(45,90,61,0.22)" stroke-width="1.5"
+          stroke-dasharray="6 14" style="transform-origin:180px 180px; animation:spin 24s linear infinite;"/>
+        <rect x="82"  y="195" width="26" height="72" fill="rgba(45,90,61,0.50)" rx="3"/>
+        <rect x="120" y="158" width="26" height="109" fill="rgba(45,90,61,0.38)" rx="3"/>
+        <rect x="158" y="122" width="26" height="145" fill="rgba(45,90,61,0.75)" rx="3"/>
+        <rect x="196" y="162" width="26" height="105" fill="rgba(45,90,61,0.48)" rx="3"/>
+        <rect x="234" y="138" width="26" height="129" fill="rgba(45,90,61,0.33)" rx="3"/>
+        <polyline points="95,195 133,158 171,122 209,162 247,138"
+          stroke="#2d5a3d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="95"  cy="195" r="5" fill="#2d5a3d"/>
+        <circle cx="133" cy="158" r="5" fill="#2d5a3d"/>
+        <circle cx="171" cy="122" r="7" fill="#2d5a3d"/>
+        <circle cx="209" cy="162" r="5" fill="#2d5a3d"/>
+        <circle cx="247" cy="138" r="5" fill="#2d5a3d"/>
+        <rect x="142" y="94" width="58" height="22" rx="4" fill="#2d5a3d"/>
+        <text x="171" y="109" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff">PEAK ↑</text>
+        <circle cx="180" cy="180" r="22" stroke="rgba(92,138,74,0.3)" stroke-width="1.5"
+          style="animation:float 3s ease-in-out infinite;"/>
+        <circle cx="180" cy="180" r="6" fill="#5c8a4a"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="border-top:1px solid var(--border);">
+  <div class="section-wrap">
+    <div class="reveal">
+      <p class="section-label">// 01 — About Me</p>
+      <div class="section-divider"></div>
+      <h2 class="section-title">자기소개</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>안녕하세요, 데이터 분석가 박민정입니다. 세종대학교 전자정보통신공학과를 졸업하며 쌓은 논리적 사고를 바탕으로, 데이터가 가진 이야기를 명확하게 전달하는 것을 목표로 합니다.</p>
+        <p>SK Networks Family AI Camp에서 EDA, 머신러닝, RAG 파이프라인, 웹 개발까지 아우르는 6개의 팀 프로젝트를 완수하며 실전 역량을 키웠습니다.</p>
+        <p>복잡한 데이터에서 의미 있는 패턴을 발굴하고, 비즈니스 의사결정에 실질적으로 기여하는 분석가로 성장하고자 합니다.</p>
+        <div style="margin-top:32px;">
+          <a href="#" class="btn btn-outline">이력서 다운로드</a>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">6</div>
+          <div class="stat-label">완료한 팀 프로젝트</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4</div>
+          <div class="stat-label">보유 자격증 / 어학</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">6개월+</div>
+          <div class="stat-label">AI Camp 집중 훈련</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">IH</div>
+          <div class="stat-label">TOEIC Speaking 등급</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div class="skills-bg">
+  <div class="section-wrap" id="skills">
+    <div class="reveal">
+      <p class="section-label">// 02 — Skills</p>
+      <div class="section-divider"></div>
+      <h2 class="section-title">기술 스택</h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-category">
+        <p class="skill-cat-title">Programming</p>
+        <div class="skill-tags">
+          <span class="tag">Python</span><span class="tag">SQL</span>
+          <span class="tag">JavaScript</span><span class="tag">Git</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="skill-cat-title">Data Analysis</p>
+        <div class="skill-tags">
+          <span class="tag">Pandas</span><span class="tag">NumPy</span>
+          <span class="tag">EDA</span><span class="tag">통계 분석</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="skill-cat-title">Machine Learning & AI</p>
+        <div class="skill-tags">
+          <span class="tag">Scikit-learn</span><span class="tag">LangChain</span>
+          <span class="tag">RAG</span><span class="tag">Fine-tuning</span>
+          <span class="tag">Vector DB</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="skill-cat-title">Visualization</p>
+        <div class="skill-tags">
+          <span class="tag">Matplotlib</span><span class="tag">Seaborn</span>
+          <span class="tag">Streamlit</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="skill-cat-title">Web & Backend</p>
+        <div class="skill-tags">
+          <span class="tag">Django</span><span class="tag">FastAPI</span>
+          <span class="tag">CSS</span><span class="tag">RDS</span><span class="tag">AWS</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <p class="skill-cat-title">Tools & Collaboration</p>
+        <div class="skill-tags">
+          <span class="tag">GitHub</span><span class="tag">Notion</span>
+          <span class="tag">Slack</span><span class="tag">Jira</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects" style="border-top:1px solid var(--border);">
+  <div class="section-wrap">
+    <div class="reveal">
+      <p class="section-label">// 03 — Projects</p>
+      <div class="section-divider"></div>
+      <h2 class="section-title">프로젝트</h2>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:10px;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:18px;" class="reveal">Featured Works</p>
+    <div class="projects-featured reveal">
+      <div class="project-card">
+        <p class="project-number">PROJECT — 001 &nbsp;|&nbsp; SKN 1차 단위 프로젝트</p>
+        <h3 class="project-title">⚡ 전기차 구매 서포터 &amp; 기업 FAQ</h3>
+        <p class="project-period">2025.07.04 — 2025.07.11</p>
+        <p class="project-desc">전기차 구매를 고려하는 사용자를 위한 정보 제공 챗봇. 기업 FAQ 크롤링을 통해 데이터베이스를 구축하고 Streamlit 인터페이스로 서비스를 구현했습니다.</p>
+        <div class="project-role"><strong>역할:</strong> 기업 FAQ 크롤링, 데이터베이스 구축, Streamlit 페이지 작성</div>
+        <div class="project-tags">
+          <span class="project-tag">Python</span><span class="project-tag">Streamlit</span>
+          <span class="project-tag">Web Crawling</span><span class="project-tag">DB</span>
+        </div>
+        <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN17-1st-1Team" target="_blank" class="project-link">→ GitHub 보기</a>
+      </div>
+      <div class="project-card">
+        <p class="project-number">PROJECT — FINAL &nbsp;|&nbsp; SKN Final 프로젝트</p>
+        <h3 class="project-title">⚾ 야구 AI 해설위원</h3>
+        <p class="project-period">2025.10.28 — 2025.12.18</p>
+        <p class="project-desc">야구 경기 데이터를 기반으로 AI 해설위원 페르소나를 구현한 서비스. 방대한 야구 데이터를 수집·가공하고 해설 스타일에 맞는 LLM 파인튜닝을 담당했습니다.</p>
+        <div class="project-role"><strong>역할:</strong> 데이터 수집 및 가공, 해설위원 페르소나 모델 파인튜닝</div>
+        <div class="project-tags">
+          <span class="project-tag">LLM</span><span class="project-tag">Fine-tuning</span>
+          <span class="project-tag">Python</span><span class="project-tag">Data Pipeline</span>
+        </div>
+        <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN17-FINAL-3Team" target="_blank" class="project-link">→ GitHub 보기</a>
+      </div>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:10px;color:var(--text-muted);letter-spacing:0.12em;text-transform:uppercase;margin:36px 0 18px;" class="reveal">Other Projects</p>
+    <div class="projects-small reveal">
+      <div class="project-small-card">
+        <h4 class="project-small-title">🌾 농·축산물 가격 변동 예측</h4>
+        <p class="project-small-period">EDA MINI · 2025.07</p>
+        <p class="project-small-desc">날씨·가축질병 등 요인에 따른 농축산물 가격 변동 분석. 데이터 전처리, 시각화, 인사이트 도출.</p>
+        <div class="skill-tags" style="margin-bottom:12px;"><span class="tag">Pandas</span><span class="tag">EDA</span></div>
+        <a href="https://github.com/Encore-SKN-17/EDA_MINI_2TEAM" target="_blank" class="project-link">→ GitHub</a>
+      </div>
+      <div class="project-small-card">
+        <h4 class="project-small-title">🥊 UFC 선수 승리 예측</h4>
+        <p class="project-small-period">ML MINI · 2025.07</p>
+        <p class="project-small-desc">UFC 선수 데이터를 활용한 분류 모델 구축 및 성능 평가.</p>
+        <div class="skill-tags" style="margin-bottom:12px;"><span class="tag">Scikit-learn</span><span class="tag">ML</span></div>
+        <a href="https://github.com/Encore-SKN-17/ML_MINI_2TEAM" target="_blank" class="project-link">→ GitHub</a>
+      </div>
+      <div class="project-small-card">
+        <h4 class="project-small-title">🎓 구독 플랫폼 이탈 예측</h4>
+        <p class="project-small-period">SKN 2차 · 2025.08</p>
+        <p class="project-small-desc">온라인 학습 플랫폼 구독 이탈 여부 예측. 전처리·모델 구축·평가 및 README 작성.</p>
+        <div class="skill-tags" style="margin-bottom:12px;"><span class="tag">Python</span><span class="tag">Classification</span></div>
+        <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN17-2nd-3Team" target="_blank" class="project-link">→ GitHub</a>
+      </div>
+      <div class="project-small-card">
+        <h4 class="project-small-title">🚗 초보 운전자 어시스턴트</h4>
+        <p class="project-small-period">SKN 3·4차 · 2025.09–10</p>
+        <p class="project-small-desc">RAG + Vector DB 기반 운전 어시스턴트 → Django 웹 UI로 확장. RDS 구축 담당.</p>
+        <div class="skill-tags" style="margin-bottom:12px;"><span class="tag">RAG</span><span class="tag">Django</span></div>
+        <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN17-3rd-5Team" target="_blank" class="project-link">→ 3차</a>
+        &nbsp;
+        <a href="https://github.com/SKNETWORKS-FAMILY-AICAMP/SKN17-4th-5Team" target="_blank" class="project-link">→ 4차</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GROWTH -->
+<div class="skills-bg" id="growth" style="border-top:1px solid var(--border);">
+  <div class="section-wrap">
+    <div class="reveal">
+      <p class="section-label">// 04 — Growth &amp; Learning</p>
+      <div class="section-divider"></div>
+      <h2 class="section-title">성장 &amp; 학습</h2>
+    </div>
+    <div class="growth-grid reveal">
+      <div class="growth-card">
+        <div class="growth-icon">📚</div>
+        <h3 class="growth-title">Daily Learning Journey</h3>
+        <p class="growth-text">SK Networks Family AI Camp를 통해 AI·데이터 분석의 전 과정을 집중적으로 학습하고 있습니다. EDA부터 머신러닝, RAG 파이프라인, LLM 파인튜닝까지 매일 새로운 기술을 실습하며 GitHub에 기록합니다.</p>
+        <a href="https://github.com/minjeon" target="_blank" class="project-link">→ GitHub 보기</a>
+      </div>
+      <div class="growth-card">
+        <div class="growth-icon">🎯</div>
+        <h3 class="growth-title">Career Goals</h3>
+        <p class="growth-text">
+          <strong style="color:var(--accent);font-size:11px;font-family:var(--mono);">단기 목표 (1년)</strong><br>
+          실무 데이터 분석 경험을 쌓고, A/B 테스트 및 고객 행동 분석 등 비즈니스 임팩트를 측정하는 역량을 강화합니다.
+        </p>
+        <p class="growth-text">
+          <strong style="color:var(--accent2);font-size:11px;font-family:var(--mono);">장기 목표 (3–5년)</strong><br>
+          데이터 기반 의사결정 문화를 조직에 정착시키는 시니어 데이터 분석가로 성장합니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<section id="education" style="border-top:1px solid var(--border);">
+  <div class="section-wrap">
+    <div class="reveal">
+      <p class="section-label">// 05 — Education</p>
+      <div class="section-divider"></div>
+      <h2 class="section-title">학력 &amp; 교육</h2>
+    </div>
+    <div class="edu-timeline reveal">
+      <div class="edu-item">
+        <p class="edu-period">2025.06 — 2025.12</p>
+        <h3 class="edu-title">SK Networks Family AI Camp</h3>
+        <p class="edu-org">SK Networks</p>
+        <p class="edu-desc">AI 기반 데이터 분석 집중 과정. EDA, 머신러닝, LLM·RAG, 웹 개발(Django/FastAPI)까지 6개 팀 프로젝트 수행.</p>
+      </div>
+      <div class="edu-item">
+        <p class="edu-period">2020.02 — 2025.02</p>
+        <h3 class="edu-title">전자정보통신공학과</h3>
+        <p class="edu-org">세종대학교</p>
+        <p class="edu-desc">전자 회로, 통신 시스템, 임베디드 소프트웨어 등 하드웨어·소프트웨어 융합 기술 전공.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<div class="skills-bg" id="certifications" style="border-top:1px solid var(--border);">
+  <div class="section-wrap">
+    <div class="reveal">
+      <p class="section-label">// 06 — Certifications</p>
+      <div class="section-divider"></div>
+      <h2 class="section-title">자격증 &amp; 어학</h2>
+    </div>
+    <div class="certs-grid reveal">
+      <div class="cert-card">
+        <p class="cert-name">PCCE Level 2</p>
+        <p class="cert-issuer">프로그래머스</p>
+        <p class="cert-date">취득</p>
+      </div>
+      <div class="cert-card">
+        <p class="cert-name">ADsP</p>
+        <p class="cert-issuer">한국데이터산업진흥원</p>
+        <p class="cert-date">2024.11 취득</p>
+      </div>
+      <div class="cert-card">
+        <p class="cert-name">6시그마 (GB)</p>
+        <p class="cert-issuer">한국자격검정평가진흥원</p>
+        <p class="cert-date">2025.05 취득</p>
+      </div>
+      <div class="cert-card">
+        <p class="cert-name">TOEIC Speaking</p>
+        <p class="cert-issuer">ETS — IH (140점)</p>
+        <p class="cert-date">2024.10 취득</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-wrap" id="contact">
+  <div class="section-wrap reveal" style="padding:0; max-width:700px;">
+    <p style="font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:20px;">// 07 — Contact</p>
+    <h2 class="contact-heading">함께<span> 성장</span>해요</h2>
+    <p class="contact-sub">데이터 분석가로서 함께 성장할 기회를 기대하고 있습니다. 언제든지 편하게 연락 주세요!</p>
+    <div class="contact-links">
+      <a href="mailto:minjg1224@naver.com" class="contact-link">📧 minjg1224@naver.com</a>
+      <a href="https://github.com/minjeon" target="_blank" class="contact-link">💻 github.com/minjeon</a>
+      <a href="https://github.com/minjeon/minjeong_portfolio" target="_blank" class="contact-link">📁 Portfolio Repo</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 박민정. All rights reserved.</p>
+  <p>Built with HTML · Hosted on GitHub Pages</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    document.querySelectorAll('[id]').forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
