@@ -238,7 +238,10 @@
     .cert-name { font-size: 14px; font-weight: 600; line-height: 1.4; }
     .cert-issuer { font-size: 12px; color: var(--text-muted); }
     .cert-date { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; }
-
+    .cert-card--full {
+      grid-column: 1 / -1;  /* 전체 너비 차지 */
+      max-width: 300px;      /* 너무 넓어지지 않게 제한 */
+    }
     /* ── CONTACT ── */
     .contact-wrap {
       background: var(--accent); color: #fff; padding: 96px 52px; text-align: center;
@@ -558,6 +561,8 @@
         <p class="cert-issuer">IH (140점)</p>
         <p class="cert-date">2024.10 취득</p>
       </div>
+    </div>
+    <div class="certs-grid reveal">
       <div class="cert-card">
         <p class="cert-name">ADsP</p>
         <p class="cert-issuer">한국데이터산업진흥원</p>
@@ -568,7 +573,6 @@
         <p class="cert-issuer">한국자격검정평가진흥원</p>
         <p class="cert-date">2025.05 취득</p>
       </div>
-      
       <div class="cert-card">
         <p class="cert-name">PCCE Level 2</p>
         <p class="cert-issuer">프로그래머스</p>
@@ -587,8 +591,8 @@
 <div class="contact-wrap" id="contact">
   <div class="section-wrap reveal" style="padding:0; max-width:700px;">
     <p style="font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:20px;">// 06 — Contact</p>
-    <h2 class="contact-heading">함께<span> 성장</span>해요</h2>
-    <p class="contact-sub">데이터 분석가로서 함께 성장할 기회를 기대하고 있습니다. 언제든지 편하게 연락 주세요!</p>
+    <h2 class="contact-heading">함께<span> 성장</span>하고 싶습니다!</h2>
+    <p class="contact-sub">데이터 분석가로서 함께 성장할 기회를 기대하고 있습니다. 언제든지 편하게 연락 바랍니다.</p>
     <div class="contact-links">
       <a href="/cdn-cgi/l/email-protection#28454146424f191a1a1c6846495e4d5a064b4745" class="contact-link">📧 <span class="__cf_email__" data-cfemail="d0bdb9bebab7e1e2e2e490beb1a6b5a2feb3bfbd">[email&#160;protected]</span></a>
       <a href="https://github.com/minjeon" target="_blank" class="contact-link">💻 github.com/minjeon</a>
